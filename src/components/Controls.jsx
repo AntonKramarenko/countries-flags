@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { CustomSelect } from './CustomSelect'
 import Search from './Search'
 import styled from 'styled-components'
+import { useEffect } from 'react'
 
 
 const options = [
@@ -27,10 +28,16 @@ const Wrapper = styled.div`
 `;
 
 
-export default function Controls() {
+export default function Controls({onSearch}) {
 
     const [search, setSearch] = useState('')
     const [region, setRegion] = useState('')
+
+    useEffect(()=>{
+       const regionValue = region?.value || ''
+        onSearch(search,regionValue)
+        // eslint-disable-next-line
+    },[search, region])
 
 
   return (
